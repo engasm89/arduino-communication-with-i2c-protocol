@@ -1,3 +1,39 @@
+/*
+ * Course: Arduino Communication With I2c Protocol
+ * Platform: Arduino
+ * Author: Ashraf S A AlMadhoun
+ * 
+ * Description:
+ * This code demonstrates the core concepts taught in the "Arduino Communication With I2c Protocol" course.
+ * It provides a practical implementation that students can study, modify, and
+ * use as a foundation for their own projects.
+ * 
+ * Learning Objectives:
+ * - Understand the fundamental principles covered in this course
+ * - Practice implementing the concepts with real code
+ * - Build a working example that can be extended
+ * 
+ * Hardware Requirements:
+ * - Development board (Arduino)
+ * - Components as specified in CIRCUIT.md
+ * - USB cable for programming
+ * 
+ * Pin Connections:
+ * Refer to CIRCUIT.md for detailed wiring diagrams and pin assignments.
+ * 
+ * Usage:
+ * 1. Review the code structure and comments
+ * 2. Connect hardware according to CIRCUIT.md
+ * 3. Upload code to your development board
+ * 4. Monitor serial output for debugging
+ * 
+ * Course Link: https://www.udemy.com/course/arduino-communication-with-i2c-protocol/
+ * Repository: https://github.com/engasm89/arduino-communication-with-i2c-protocol
+ * 
+ * Copyright (c) 2025 Ashraf S A AlMadhoun
+ * Licensed under MIT License
+ */
+
 #include <stdio.h> // Include I/O for I2C logs
 #include <unistd.h> // Include POSIX sleep for timing
 
@@ -41,8 +77,8 @@ void ar_i2c_scan(void) { // Scanner
   printf("I2C Scan complete\n"); // Log done
 }
 
-// Entry demonstrating Arduino I2C communication
-int main(void) { // Begin main
+// Program entry point demonstrating Arduino I2C communication
+int main(void) { // Main function implementation
   printf("Arduino Communication with I2C Protocol\n"); // Title
   ar_i2c_init(100000); // Initialize at 100kHz
   unsigned char v = 0; // Prepare value var
@@ -53,6 +89,6 @@ int main(void) { // Begin main
     printf("{\"i2c_ok\":%d,\"last_val\":0x%02X}\n", ar_i2c_ok, v); // Print status
     usleep(300000); // Delay 300 ms
   } // End loop
-  return 0; // Exit success
-} // End main
+  return 0; // Exit successfully
+} // End of main function
 
