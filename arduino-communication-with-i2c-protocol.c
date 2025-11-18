@@ -27,6 +27,20 @@ int ar_i2c_read(unsigned char addr, unsigned char reg, unsigned char *val) { // 
   return 1; // Success
 } // End ar_i2c_read
 
+// Scan common I2C address range and report detected devices
+void ar_i2c_scan(void) { // Scanner
+  printf("I2C Scan start\n"); // Log start
+  for (unsigned char addr = 0x08; addr <= 0x77; ++addr) { // Valid 7-bit range
+    unsigned char dummy = 0; // Dummy value
+    int ok = ar_i2c_read(addr, 0x00, &dummy); // Attempt a read
+    if (ok) { // If read succeeded
+      printf("Found device at 0x%02X\n", addr); // Report address
+    } // End detection
+    usleep(10000); // 10ms between probes
+  } // End range
+  printf("I2C Scan complete\n"); // Log done
+}
+
 // Entry demonstrating Arduino I2C communication
 int main(void) { // Begin main
   printf("Arduino Communication with I2C Protocol\n"); // Title
@@ -34,6 +48,7 @@ int main(void) { // Begin main
   unsigned char v = 0; // Prepare value var
   ar_i2c_write(0x3C, 0x00, 0x77); // Write to device
   ar_i2c_read(0x3C, 0x00, &v); // Read back
+  ar_i2c_scan(); // Scan bus for devices
   for (int i = 0; i < 3; ++i) { // Emit frames
     printf("{\"i2c_ok\":%d,\"last_val\":0x%02X}\n", ar_i2c_ok, v); // Print status
     usleep(300000); // Delay 300 ms
